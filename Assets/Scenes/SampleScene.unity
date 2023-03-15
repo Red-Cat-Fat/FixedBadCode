@@ -152,10 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e2f70bbfee5c9409dab9366da601a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3396548907158465802, guid: 7abcfe62973972048a747040fa326009, type: 3}
-  transformSpawn: {fileID: 2066252050}
-  time: 0.4
-  radius: 3
+  Prefab: {fileID: 3396548907158465802, guid: 7abcfe62973972048a747040fa326009, type: 3}
+  TransformSpawn: {fileID: 2066252050}
+  TimeSpawn: 0.4
+  RadiusSpawn: 3
 --- !u!4 &96591546
 Transform:
   m_ObjectHideFlags: 0
@@ -338,8 +338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bba50efc694cd94fa95a43e3ade87ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countBall: {fileID: 0}
-  changeTime: 0.2
+  CountBallText: {fileID: 1797793447}
+  SpeedValueText: {fileID: 1850602333}
+  ChangeTime: 0.2
 --- !u!114 &163142513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +417,7 @@ RectTransform:
   - {fileID: 1797793446}
   - {fileID: 1749161938}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -452,10 +453,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e2f70bbfee5c9409dab9366da601a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8825396058871552578, guid: 661c9b53cc0932847b8dfe680e9c938b, type: 3}
-  transformSpawn: {fileID: 2066252050}
-  time: 1
-  radius: 6
+  Prefab: {fileID: 8825396058871552578, guid: 661c9b53cc0932847b8dfe680e9c938b, type: 3}
+  TransformSpawn: {fileID: 2066252050}
+  TimeSpawn: 1
+  RadiusSpawn: 6
 --- !u!4 &220958921
 Transform:
   m_ObjectHideFlags: 0
@@ -678,10 +679,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e2f70bbfee5c9409dab9366da601a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6057674659627671086, guid: 38ff5d19525d8ea4c889a175e12c22fb, type: 3}
-  transformSpawn: {fileID: 2066252050}
-  time: 1
-  radius: 0
+  Prefab: {fileID: 6057674659627671086, guid: 38ff5d19525d8ea4c889a175e12c22fb, type: 3}
+  TransformSpawn: {fileID: 2066252050}
+  TimeSpawn: 1
+  RadiusSpawn: 0
 --- !u!4 &1678683621
 Transform:
   m_ObjectHideFlags: 0
@@ -898,7 +899,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697838528
 GameObject:
@@ -913,7 +914,7 @@ GameObject:
   - component: {fileID: 1697838531}
   - component: {fileID: 1697838530}
   m_Layer: 5
-  m_Name: Button
+  m_Name: MinButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1044,7 +1045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1749161938}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: ChangeSpeedBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1070,7 +1071,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &1797793445
@@ -1085,7 +1086,7 @@ GameObject:
   - component: {fileID: 1797793448}
   - component: {fileID: 1797793447}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CountBallsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,7 +1109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1797793447
@@ -1220,7 +1221,7 @@ GameObject:
   - component: {fileID: 1850602334}
   - component: {fileID: 1850602333}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SpeedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1403,7 +1404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2feaee945e76004ebb7c72c6a86c1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 10
+  Distance: 10
 --- !u!4 &2083183683
 Transform:
   m_ObjectHideFlags: 0
@@ -1417,52 +1418,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2097006405
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2097006407}
-  - component: {fileID: 2097006406}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2097006406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097006405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f30c14eae3be3d640aec2ef4815f0dda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countBalls: 0
---- !u!4 &2097006407
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097006405}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099167521
 GameObject:
@@ -1477,7 +1433,7 @@ GameObject:
   - component: {fileID: 2099167524}
   - component: {fileID: 2099167523}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: AddButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 119250936076568466, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
+      propertyPath: BallType
+      value: red
+      objectReference: {fileID: 0}
+    - target: {fileID: 119250936076568466, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
       propertyPath: ballType
       value: red
       objectReference: {fileID: 0}
@@ -106,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e134401e769aad4cab7adf9c9903c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tr: 1
-  rv: 5
+  RandomCooldown: 1
+  RandovVelocity: 5

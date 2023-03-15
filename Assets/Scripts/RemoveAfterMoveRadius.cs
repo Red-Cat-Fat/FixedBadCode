@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -5,13 +6,19 @@ public class RemoveAfterMoveRadius : MonoBehaviour
 {
     [FormerlySerializedAs("ballType")] 
     public string BallType;
-    
-    void Update()
+
+    private ZeroPosition _zero;
+
+    public void Awake()
     {
-        var zero = FindObjectOfType<ZeroPosition>();
-        if (Vector3.Distance(transform.position, zero.transform.position) > zero.Distance)
+        _zero = FindObjectOfType<ZeroPosition>();
+    }
+
+    public void Update()
+    {
+        if (Vector3.Distance(transform.position, _zero.transform.position) > _zero.Distance)
         {
-            GameManager.Instance.totalBals[BallType]--;
+            GameManager.Instance.TotalBals[BallType]--;
             Destroy(gameObject); 
         }
     }

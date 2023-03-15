@@ -31,13 +31,13 @@ public class GreenBall : MonoBehaviour
 			var blueBalls = FindObjectsOfType<GreenTarget>();
 			newGameObject.GetComponent<GreenBall>()._direction =
 				blueBalls[Random.Range(0, blueBalls.Length)].transform.position - newGameObject.transform.position;
-			GameManager.Instance.totalBals["green"]++;
+			GameManager.Instance.TotalBals["green"]++;
 		}
 
 		if (collision.gameObject.name == "RedBall(Clone)" || collision.gameObject.name == "GreenBall(Clone)")
 		{
 			Destroy(this.gameObject);
-			GameManager.Instance.totalBals["green"]--;
+			GameManager.Instance.TotalBals["green"]--;
 		}
 	}
 }

@@ -21,13 +21,13 @@ public class BallSpawner : MonoBehaviour
 		_curTime -= UnityEngine.Time.deltaTime;
 		if (_curTime < 0)
 		{
-			GameObject.Instantiate(
+			var newBall = GameObject.Instantiate(
 				Prefab,
 				Random.insideUnitSphere * RadiusSpawn,
 				Quaternion.identity,
 				TransformSpawn);
-			GameManager.Instance.CountBalls++;
-			GameManager.Instance.totalBals[Prefab.tag]++;
+			
+			GameManager.Instance.TotalBals[Prefab.tag]++;
 			Debug.Log(Prefab.tag + " заспавнили!!!!!");
 			_curTime = TimeSpawn;
 		}

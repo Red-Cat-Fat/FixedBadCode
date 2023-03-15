@@ -1,22 +1,18 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
-    public static GameManager Instance;
+    private static GameManager _instance;
 
-    [FormerlySerializedAs("countBalls")] 
-    public int CountBalls = 0;
-    public Dictionary<string, int> totalBals = new Dictionary<string, int>();
+    public static GameManager Instance
+        => _instance ??= new GameManager();
+
+    public Dictionary<string, int> TotalBals = new Dictionary<string, int>();
     
-    private void Awake()
+    private GameManager()
     {
-        Instance = this;
-        DontDestroyOnLoad(this);
-        
-        GameManager.Instance.totalBals["red"] = 0;
-        GameManager.Instance.totalBals["green"] = 0;
-        GameManager.Instance.totalBals["blue"] = 0;
+        TotalBals["red"] = 0;
+        TotalBals["green"] = 0;
+        TotalBals["blue"] = 0;
     }
 }
