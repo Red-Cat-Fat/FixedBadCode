@@ -1,12 +1,14 @@
-﻿namespace Infrastructure
+﻿using UI.Common.StateViewers;
+
+namespace Infrastructure
 {
 	public class Game
 	{
 		public GameStateMachine StateMachine;
 
-		public Game()
+		public Game(GroupCanvasStateViewer loadCurtain)
 		{
-			StateMachine = new GameStateMachine();
+			StateMachine = new GameStateMachine(loadCurtain);
 		}
 	}
 }
