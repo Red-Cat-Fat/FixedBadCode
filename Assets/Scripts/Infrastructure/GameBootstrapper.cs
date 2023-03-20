@@ -1,17 +1,20 @@
+using Infrastructure.Service.LoadLevels;
+using Infrastructure.Utility;
 using UI.Common.StateViewers;
 using UnityEngine;
 
 namespace Infrastructure
 {
-	public class GameBootstrapper : MonoBehaviour
+	public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
 	{
-		public GameObject LoadCurtain;
+		public GroupCanvasStateViewer LoadCurtain;
 		public void Awake()
 		{
-			Instantiate(LoadCurtain);
 			DontDestroyOnLoad(LoadCurtain);
-			var game = new Game(LoadCurtain.GetComponent<GroupCanvasStateViewer>());
+			var game = new Game(LoadCurtain, this);
 			game.StateMachine.Start();
+			
+			DontDestroyOnLoad(this);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Service.LoadLevels;
+using Infrastructure.Utility;
 using UI.Common.StateViewers;
 
 namespace Infrastructure.States
@@ -9,10 +10,10 @@ namespace Infrastructure.States
 		private readonly ILoadLevelService _loadLevelService;
 		private const string _gamePlayScene = "GamePlay";
 
-		public LoadSceneState(IStateViewer loadCurtain)
+		public LoadSceneState(IStateViewer loadCurtain, ILoadLevelService loadLevelService)
 		{
 			_loadCurtain = loadCurtain;
-			_loadLevelService = new UnitySceneLoadLevelService();
+			_loadLevelService = loadLevelService;
 		}
 		
 		public void Enter()

@@ -1,4 +1,5 @@
-﻿using UI.Common.StateViewers;
+﻿using Infrastructure.Utility;
+using UI.Common.StateViewers;
 
 namespace Infrastructure
 {
@@ -6,9 +7,9 @@ namespace Infrastructure
 	{
 		public GameStateMachine StateMachine;
 
-		public Game(GroupCanvasStateViewer loadCurtain)
+		public Game(GroupCanvasStateViewer loadCurtain, ICoroutineRunner coroutineRunner)
 		{
-			StateMachine = new GameStateMachine(loadCurtain);
+			StateMachine = new GameStateMachine(loadCurtain, coroutineRunner);
 		}
 	}
 }

@@ -1,13 +1,32 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System.Collections;
+using Infrastructure.Utility;
+using UnityEngine.SceneManagement;
 
 namespace Infrastructure.Service.LoadLevels
 {
 	public class UnitySceneLoadLevelService : ILoadLevelService
 	{
-		public void Load(string name)
+		private readonly ICoroutineRunner _coroutineRunner;
+
+		public UnitySceneLoadLevelService(ICoroutineRunner coroutineRunner)
 		{
-			if(SceneManager.GetActiveScene().name != name)
-				SceneManager.LoadScene(name);
+			_coroutineRunner = coroutineRunner;
+		}
+		
+		public void Load(string name)
+			=> _coroutineRunner.StartCoroutine(LoadScene(name));
+
+		private IEnumerator LoadScene(string name)
+		{
+			if (SceneManager.GetActiveScene().name == name)
+				yield break;
+			
+			var waitLoadScene = SceneManager.LoadSceneAsync(name);
+
+			while (!waitLoadScene.isDone)
+			{
+				yield return null;
+			}
 		}
 	}
 }
