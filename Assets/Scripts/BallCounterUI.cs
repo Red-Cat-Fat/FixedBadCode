@@ -1,24 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using CoreGamePlay.Components;
+using CoreGamePlay.Components.Waiters;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class GameManagerUI : MonoBehaviour
+public class BallCounterUI : MonoBehaviour, IBallCounterWaiter
 {
 	public TMP_Text CountBallText;
 	public TMP_Text SpeedValueText;
     public float ChangeTime = 0.2f;
+    private BallCounter _counter;
+    private bool _isInitialize;
+
+    public void Constuct(BallCounter counter)
+    {
+	    _counter = counter;
+	    _isInitialize = true;
+    }
 
     public void Update()
     {
+	    if (!_isInitialize)
+		    return;
 	    CountBallText.text = "Count ball: \n red:" +
-	                         GameManager.Instance.TotalBals["red"] +
+	                         _counter.TotalBals["red"] +
 	                         "\n green:" +
-	                         GameManager.Instance.TotalBals["green"] +
+	                         _counter.TotalBals["green"] +
 	                         "\n blue:" +
-	                         GameManager.Instance.TotalBals["blue"] +
+	                         _counter.TotalBals["blue"] +
 	                         "\n ";
     }
 
@@ -27,7 +35,7 @@ public class GameManagerUI : MonoBehaviour
 	    Time.timeScale += ChangeTime;
 	    SpeedValueText.text = "TimeSpeed:" + Time.timeScale;
     }
-    
+
     public void RemoveSpeed()
     {
 	    Time.timeScale -= ChangeTime;

@@ -1,15 +1,10 @@
 using System.Collections.Generic;
 
-public class GameManager
+public class BallCounter
 {
-    private static GameManager _instance;
-
-    public static GameManager Instance
-        => _instance ??= new GameManager();
-
     public Dictionary<string, int> TotalBals = new Dictionary<string, int>();
     
-    private GameManager()
+    public BallCounter()
     {
         TotalBals["red"] = 0;
         TotalBals["green"] = 0;

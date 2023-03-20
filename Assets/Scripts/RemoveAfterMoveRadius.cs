@@ -1,13 +1,21 @@
 using System;
+using CoreGamePlay.Components;
+using CoreGamePlay.Components.Waiters;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class RemoveAfterMoveRadius : MonoBehaviour
+public class RemoveAfterMoveRadius : MonoBehaviour, IBallCounterWaiter
 {
     [FormerlySerializedAs("ballType")] 
     public string BallType;
 
     private ZeroPosition _zero;
+    private BallCounter _counter;
+
+    public void Constuct(BallCounter counter)
+    {
+        _counter = counter;
+    }
 
     public void Awake()
     {
@@ -18,7 +26,7 @@ public class RemoveAfterMoveRadius : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _zero.transform.position) > _zero.Distance)
         {
-            GameManager.Instance.TotalBals[BallType]--;
+            _counter.TotalBals[BallType]--;
             Destroy(gameObject); 
         }
     }

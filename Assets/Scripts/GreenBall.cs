@@ -1,10 +1,18 @@
+using CoreGamePlay.Components;
+using CoreGamePlay.Components.Waiters;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GreenBall : MonoBehaviour
+public class GreenBall : MonoBehaviour, IBallCounterWaiter
 {
 	private Vector3 _direction;
+	private BallCounter _counter;
 
+	public void Constuct(BallCounter counter)
+	{
+		_counter = counter;
+	}
+	
 	private void Start()
 	{
 		var blueBalls = FindObjectsOfType<GreenTarget>();
@@ -31,13 +39,13 @@ public class GreenBall : MonoBehaviour
 			var blueBalls = FindObjectsOfType<GreenTarget>();
 			newGameObject.GetComponent<GreenBall>()._direction =
 				blueBalls[Random.Range(0, blueBalls.Length)].transform.position - newGameObject.transform.position;
-			GameManager.Instance.TotalBals["green"]++;
+			_counter.TotalBals["green"]++;
 		}
 
 		if (collision.gameObject.name == "RedBall(Clone)" || collision.gameObject.name == "GreenBall(Clone)")
 		{
 			Destroy(this.gameObject);
-			GameManager.Instance.TotalBals["green"]--;
+			_counter.TotalBals["green"]--;
 		}
 	}
 }
