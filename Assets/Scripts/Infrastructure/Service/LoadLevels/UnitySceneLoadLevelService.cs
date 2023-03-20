@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Infrastructure.Utility;
 using UnityEngine.SceneManagement;
 
@@ -13,20 +14,22 @@ namespace Infrastructure.Service.LoadLevels
 			_coroutineRunner = coroutineRunner;
 		}
 		
-		public void Load(string name)
-			=> _coroutineRunner.StartCoroutine(LoadScene(name));
+		public void Load(string name, Action onLoadLevel)
+			=> _coroutineRunner.StartCoroutine(LoadScene(name, onLoadLevel));
 
-		private IEnumerator LoadScene(string name)
+		private IEnumerator LoadScene(string name, Action onLoadLevel)
 		{
 			if (SceneManager.GetActiveScene().name == name)
+			{
+				onLoadLevel?.Invoke();
 				yield break;
+			}
 			
 			var waitLoadScene = SceneManager.LoadSceneAsync(name);
-
 			while (!waitLoadScene.isDone)
-			{
 				yield return null;
-			}
+			
+			onLoadLevel?.Invoke();
 		}
 	}
 }

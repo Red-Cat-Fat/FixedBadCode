@@ -1,4 +1,5 @@
 ﻿using Infrastructure.States;
+using UnityEngine;
 
 namespace Infrastructure
 {
@@ -6,7 +7,7 @@ namespace Infrastructure
 	{
 		public void Enter()
 		{
-			
+			Debug.LogWarning("On GameBootstrapState");
 		}
 
 		public void Exit()

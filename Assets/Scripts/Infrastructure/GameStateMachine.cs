@@ -12,14 +12,13 @@ namespace Infrastructure
 		
 		public GameStateMachine(IStateViewer loadCurtain, ICoroutineRunner coroutineRunner)
 		{
-			_loadScene = new LoadSceneState(loadCurtain, new UnitySceneLoadLevelService(coroutineRunner));
 			_gameBootstrap = new GameBootstrapState();
+			_loadScene = new LoadSceneState(loadCurtain, new UnitySceneLoadLevelService(coroutineRunner), _gameBootstrap);
 		}
 
 		public void Start()
 		{
 			_loadScene.Enter();
-			_loadScene.Exit();
 		}
 	}
 }

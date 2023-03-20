@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Service.LoadLevels;
-using Infrastructure.Utility;
 using UI.Common.StateViewers;
 
 namespace Infrastructure.States
@@ -8,23 +7,30 @@ namespace Infrastructure.States
 	{
 		private readonly IStateViewer _loadCurtain;
 		private readonly ILoadLevelService _loadLevelService;
+		private readonly IState _nextState;
+		
 		private const string _gamePlayScene = "GamePlay";
 
-		public LoadSceneState(IStateViewer loadCurtain, ILoadLevelService loadLevelService)
+		public LoadSceneState(
+			IStateViewer loadCurtain,
+			ILoadLevelService loadLevelService,
+			IState nextState)
 		{
 			_loadCurtain = loadCurtain;
 			_loadLevelService = loadLevelService;
+			_nextState = nextState;
 		}
 		
 		public void Enter()
 		{
 			_loadCurtain.Enable();
-			_loadLevelService.Load(_gamePlayScene);
+			_loadLevelService.Load(_gamePlayScene, Exit);
 		}
 
 		public void Exit()
 		{
 			_loadCurtain.Disable();
+			_nextState.Enter();
 		}
 	}
 }

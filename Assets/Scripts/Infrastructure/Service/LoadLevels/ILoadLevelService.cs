@@ -1,7 +1,9 @@
-﻿namespace Infrastructure.Service.LoadLevels
+﻿using System;
+
+namespace Infrastructure.Service.LoadLevels
 {
 	public interface ILoadLevelService
 	{
-		void Load(string name);
+		void Load(string name, Action onLoadLevel);
 	}
 }
