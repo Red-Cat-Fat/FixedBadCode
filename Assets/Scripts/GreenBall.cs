@@ -39,6 +39,11 @@ public class GreenBall : MonoBehaviour, IBallCounterWaiter
 			var blueBalls = FindObjectsOfType<GreenTarget>();
 			newGameObject.GetComponent<GreenBall>()._direction =
 				blueBalls[Random.Range(0, blueBalls.Length)].transform.position - newGameObject.transform.position;
+
+			var ballWaiters = newGameObject.GetComponents<IBallCounterWaiter>();
+			foreach (var waiter in ballWaiters)
+				waiter.Constuct(_counter);
+
 			_counter.TotalBals["green"]++;
 		}
 
