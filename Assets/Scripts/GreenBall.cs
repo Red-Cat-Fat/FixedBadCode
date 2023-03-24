@@ -6,13 +6,16 @@ using Random = UnityEngine.Random;
 public class GreenBall : MonoBehaviour, IBallCounterWaiter
 {
 	private Vector3 _direction;
-	private BallCounter _counter;
+	BallCounter _counter = new BallCounter();
+
 
 	public void Constuct(BallCounter counter)
 	{
 		_counter = counter;
 	}
+
 	
+
 	private void Start()
 	{
 		var blueBalls = FindObjectsOfType<GreenTarget>();

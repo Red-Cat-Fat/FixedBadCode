@@ -10,13 +10,13 @@ public class RemoveAfterMoveRadius : MonoBehaviour, IBallCounterWaiter
     public string BallType;
 
     private ZeroPosition _zero;
-    private BallCounter _counter;
+    BallCounter _counter = new BallCounter();
 
     public void Constuct(BallCounter counter)
     {
         _counter = counter;
     }
-
+    
     public void Awake()
     {
         _zero = FindObjectOfType<ZeroPosition>();
@@ -24,10 +24,10 @@ public class RemoveAfterMoveRadius : MonoBehaviour, IBallCounterWaiter
 
     public void Update()
     {
-        if (Vector3.Distance(transform.position, _zero.transform.position) > _zero.Distance)
+        if (Vector3.Distance(gameObject.transform.position, _zero.transform.position) > _zero.Distance)
         {
-            _counter.TotalBals[BallType]--;
-            Destroy(gameObject); 
+                _counter.TotalBals[BallType]--;
+                Destroy(this.gameObject);
         }
     }
 }
