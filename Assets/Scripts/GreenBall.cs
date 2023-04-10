@@ -1,5 +1,6 @@
 using CoreGamePlay.Components;
 using CoreGamePlay.Components.Waiters;
+using CoreGamePlay.Factories;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,9 +9,12 @@ public class GreenBall : MonoBehaviour, IBallCounterWaiter
 	private Vector3 _direction;
 	private BallCounter _counter;
 
+	private BallFactory _factory;
+
 	public void Constuct(BallCounter counter)
 	{
 		_counter = counter;
+		_factory = new BallFactory("green", gameObject, _counter);
 	}
 	
 	private void Start()
@@ -32,14 +36,7 @@ public class GreenBall : MonoBehaviour, IBallCounterWaiter
 	{
 		if (collision.gameObject.name == "BlueBall(Clone)")
 		{
-			var newGameObject = Instantiate(
-				gameObject,
-				transform.position + Random.insideUnitSphere.normalized * 2,
-				Quaternion.identity);
-			var blueBalls = FindObjectsOfType<GreenTarget>();
-			newGameObject.GetComponent<GreenBall>()._direction =
-				blueBalls[Random.Range(0, blueBalls.Length)].transform.position - newGameObject.transform.position;
-			_counter.TotalBals["green"]++;
+			_factory.SpawnBall(transform.position + Random.insideUnitSphere.normalized * 2);
 		}
 
 		if (collision.gameObject.name == "RedBall(Clone)" || collision.gameObject.name == "GreenBall(Clone)")

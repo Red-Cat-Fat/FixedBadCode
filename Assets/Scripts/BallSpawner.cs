@@ -1,4 +1,5 @@
 using CoreGamePlay.Components.Waiters;
+using CoreGamePlay.Factories;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,10 +17,13 @@ public class BallSpawner : MonoBehaviour, IBallCounterWaiter
 	private float _curTime;
 	private BallCounter _counter;
 	private bool _isInitialize = false;
+	private BallFactory _factory;
+	
 	public void Constuct(BallCounter counter)
 	{
 		_counter = counter;
 		_isInitialize = true;
+		_factory = new BallFactory(Prefab.tag, Prefab, _counter);
 	}
 	
 	private void Update()
@@ -30,18 +34,7 @@ public class BallSpawner : MonoBehaviour, IBallCounterWaiter
 		_curTime -= UnityEngine.Time.deltaTime;
 		if (_curTime < 0)
 		{
-			var newBall = GameObject.Instantiate(
-				Prefab,
-				Random.insideUnitSphere * RadiusSpawn,
-				Quaternion.identity,
-				TransformSpawn);
-
-			var ballWaiters = newBall.GetComponents<IBallCounterWaiter>();
-			foreach (var waiter in ballWaiters) 
-				waiter.Constuct(_counter);
-			
-			_counter.TotalBals[Prefab.tag]++;
-			Debug.Log(Prefab.tag + " заспавнили!!!!!");
+			_factory.SpawnBall(Random.insideUnitSphere * RadiusSpawn);
 			_curTime = TimeSpawn;
 		}
 	}
