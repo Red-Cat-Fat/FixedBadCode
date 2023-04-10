@@ -22,11 +22,11 @@ public class BallCounterUI : MonoBehaviour, IBallCounterWaiter
 	    if (!_isInitialize)
 		    return;
 	    CountBallText.text = "Count ball: \n red:" +
-	                         _counter.TotalBals["red"] +
+	                         _counter.GetValue(BallType.Red) +
 	                         "\n green:" +
-	                         _counter.TotalBals["green"] +
+							_counter.GetValue(BallType.Green) +
 	                         "\n blue:" +
-	                         _counter.TotalBals["blue"] +
+							_counter.GetValue(BallType.Blue) +
 	                         "\n ";
     }
 

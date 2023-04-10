@@ -7,6 +7,7 @@ public class BallSpawner : MonoBehaviour, IBallCounterWaiter
 {
 	[FormerlySerializedAs("prefab")] 
 	public GameObject Prefab;
+	public BallType BallType;
 	[FormerlySerializedAs("transformSpawn")]
 	public Transform TransformSpawn;
 	[FormerlySerializedAs("time")]
@@ -15,15 +16,13 @@ public class BallSpawner : MonoBehaviour, IBallCounterWaiter
 	public int RadiusSpawn;
 
 	private float _curTime;
-	private BallCounter _counter;
 	private bool _isInitialize = false;
 	private BallFactory _factory;
 	
 	public void Constuct(BallCounter counter)
 	{
-		_counter = counter;
 		_isInitialize = true;
-		_factory = new BallFactory(Prefab.tag, Prefab, _counter);
+		_factory = new BallFactory(BallType, Prefab, counter);
 	}
 	
 	private void Update()

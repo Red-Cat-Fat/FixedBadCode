@@ -6,8 +6,7 @@ using UnityEngine.Serialization;
 
 public class RemoveAfterMoveRadius : MonoBehaviour, IBallCounterWaiter
 {
-    [FormerlySerializedAs("ballType")] 
-    public string BallType;
+    public BallType BallType;
 
     private ZeroPosition _zero;
     private BallCounter _counter;
@@ -26,7 +25,7 @@ public class RemoveAfterMoveRadius : MonoBehaviour, IBallCounterWaiter
     {
         if (Vector3.Distance(transform.position, _zero.transform.position) > _zero.Distance)
         {
-            _counter.TotalBals[BallType]--;
+            _counter.DelBall(BallType);
             Destroy(gameObject); 
         }
     }

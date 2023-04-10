@@ -14,7 +14,7 @@ public class GreenBall : MonoBehaviour, IBallCounterWaiter
 	public void Constuct(BallCounter counter)
 	{
 		_counter = counter;
-		_factory = new BallFactory("green", gameObject, _counter);
+		_factory = new BallFactory(BallType.Green, gameObject, _counter);
 	}
 	
 	private void Start()
@@ -42,7 +42,7 @@ public class GreenBall : MonoBehaviour, IBallCounterWaiter
 		if (collision.gameObject.name == "RedBall(Clone)" || collision.gameObject.name == "GreenBall(Clone)")
 		{
 			Destroy(this.gameObject);
-			_counter.TotalBals["green"]--;
+			_counter.DelBall(BallType.Green);
 		}
 	}
 }

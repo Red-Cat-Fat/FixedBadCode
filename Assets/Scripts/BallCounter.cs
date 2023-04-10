@@ -1,13 +1,35 @@
 using System.Collections.Generic;
 
+public enum BallType
+{
+    Red = 0,
+    Green = 1,
+    Blue = 2,
+}
+
 public class BallCounter
 {
-    public Dictionary<string, int> TotalBals = new Dictionary<string, int>();
+    private readonly Dictionary<BallType, int> _totalBals = new Dictionary<BallType, int>();
     
     public BallCounter()
     {
-        TotalBals["red"] = 0;
-        TotalBals["green"] = 0;
-        TotalBals["blue"] = 0;
+        _totalBals[BallType.Red] = 0;
+        _totalBals[BallType.Green] = 0;
+        _totalBals[BallType.Blue] = 0;
+    }
+
+    public int GetValue(BallType type)
+    {
+        return _totalBals[type];
+    }
+    
+    public void AddBall(BallType type)
+    {
+        _totalBals[type]++;
+    }
+
+    public void DelBall(BallType type)
+    {
+        _totalBals[type]--;
     }
 }
