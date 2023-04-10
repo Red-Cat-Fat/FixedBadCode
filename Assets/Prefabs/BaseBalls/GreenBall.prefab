@@ -8,8 +8,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 119250936076568466, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
+      propertyPath: BallType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 119250936076568466, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
       propertyPath: ballType
       value: green
+      objectReference: {fileID: 0}
+    - target: {fileID: 899131871652420788, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
+      propertyPath: CollisionParent
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6254946119737225616, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
       propertyPath: m_RootOrder
@@ -90,6 +98,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5119347005836901099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6057674659627671086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd781dc8579141a68f1edbfd90462b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collisionDetected: 0000000001000000
+--- !u!114 &8174654497397905040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6057674659627671086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a5554810a34fc9b03205e1d47da57b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collisionDetected: 02000000
 --- !u!114 &8806469853347960871
 MonoBehaviour:
   m_ObjectHideFlags: 0

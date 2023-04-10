@@ -1,4 +1,6 @@
 using CoreGamePlay.Components;
+using CoreGamePlay.Components.Balls;
+using CoreGamePlay.Components.Balls.CollisionStrategies;
 using CoreGamePlay.Components.Waiters;
 using CoreGamePlay.Factories;
 using UnityEngine;
@@ -30,19 +32,5 @@ public class GreenBall : MonoBehaviour, IBallCounterWaiter
 			transform.position.x + _direction.x * Time.deltaTime,
 			transform.position.y + _direction.y * Time.deltaTime,
 			transform.position.z + _direction.z * Time.deltaTime);
-	}
-
-	private void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.name == "BlueBall(Clone)")
-		{
-			_factory.SpawnBall(transform.position + Random.insideUnitSphere.normalized * 2);
-		}
-
-		if (collision.gameObject.name == "RedBall(Clone)" || collision.gameObject.name == "GreenBall(Clone)")
-		{
-			Destroy(this.gameObject);
-			_counter.DelBall(BallType.Green);
-		}
 	}
 }

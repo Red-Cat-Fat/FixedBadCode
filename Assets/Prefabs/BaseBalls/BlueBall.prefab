@@ -8,8 +8,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 119250936076568466, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
+      propertyPath: BallType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 119250936076568466, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
       propertyPath: ballType
       value: blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 899131871652420788, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
+      propertyPath: CollisionParent
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6254946119737225616, guid: 9007d649b94100043b8adf6e00f39508, type: 3}
       propertyPath: m_RootOrder
