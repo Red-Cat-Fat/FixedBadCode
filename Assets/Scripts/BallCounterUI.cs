@@ -1,9 +1,7 @@
-using CoreGamePlay.Components;
-using CoreGamePlay.Components.Waiters;
 using TMPro;
 using UnityEngine;
 
-public class BallCounterUI : MonoBehaviour, IBallCounterWaiter
+public class BallCounterUI : MonoBehaviour
 {
 	public TMP_Text CountBallText;
 	public TMP_Text SpeedValueText;

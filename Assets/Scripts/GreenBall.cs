@@ -6,15 +6,9 @@ using CoreGamePlay.Factories;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GreenBall : MonoBehaviour, IBallCounterWaiter
+public class GreenBall : MonoBehaviour
 {
 	private Vector3 _direction;
-	private BallCounter _counter;
-
-	public void Construct(BallCounter counter)
-	{
-		_counter = counter;
-	}
 	
 	private void Start()
 	{

@@ -24,10 +24,6 @@ namespace CoreGamePlay.Factories
 				position,
 				Quaternion.identity);
 
-			var ballWaiters = newGameObject.GetComponents<IBallCounterWaiter>();
-			foreach (var waiter in ballWaiters)
-				waiter.Construct(_counter);
-
 			var factoryWaiters = newGameObject.GetComponents<IBallFactoryWaiter>();
 			foreach (var waiter in factoryWaiters)
 				waiter.Construct(this);
