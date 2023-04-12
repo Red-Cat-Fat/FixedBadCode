@@ -11,7 +11,7 @@ public class RemoveAfterMoveRadius : MonoBehaviour, IBallCounterWaiter
     private ZeroPosition _zero;
     private BallCounter _counter;
 
-    public void Constuct(BallCounter counter)
+    public void Construct(BallCounter counter)
     {
         _counter = counter;
     }

@@ -2,6 +2,6 @@
 {
 	public interface IBallCounterWaiter
 	{
-		void Constuct(BallCounter counter);
+		void Construct(BallCounter counter);
 	}
 }

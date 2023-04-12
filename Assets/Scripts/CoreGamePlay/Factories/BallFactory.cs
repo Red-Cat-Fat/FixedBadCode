@@ -25,7 +25,11 @@ namespace CoreGamePlay.Factories
 
 			var ballWaiters = newGameObject.GetComponents<IBallCounterWaiter>();
 			foreach (var waiter in ballWaiters)
-				waiter.Constuct(_counter);
+				waiter.Construct(_counter);
+
+			var factoryWaiters = newGameObject.GetComponents<IBallFactoryWaiter>();
+			foreach (var waiter in factoryWaiters)
+				waiter.Construct(this);
 			
 			_counter.AddBall(_ballType);
 		}

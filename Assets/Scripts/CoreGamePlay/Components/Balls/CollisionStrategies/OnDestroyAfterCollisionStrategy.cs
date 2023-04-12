@@ -6,7 +6,7 @@ namespace CoreGamePlay.Components.Balls.CollisionStrategies
 	{
 		private BallCounter _counter;
 		
-		public void Constuct(BallCounter counter)
+		public void Construct(BallCounter counter)
 		{
 			_counter = counter;
 		}

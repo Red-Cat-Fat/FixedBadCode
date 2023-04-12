@@ -11,12 +11,9 @@ public class GreenBall : MonoBehaviour, IBallCounterWaiter
 	private Vector3 _direction;
 	private BallCounter _counter;
 
-	private BallFactory _factory;
-
-	public void Constuct(BallCounter counter)
+	public void Construct(BallCounter counter)
 	{
 		_counter = counter;
-		_factory = new BallFactory(BallType.Green, gameObject, _counter);
 	}
 	
 	private void Start()

@@ -1,4 +1,5 @@
-﻿using Infrastructure.Service.LoadLevels;
+﻿using Infrastructure.Configs;
+using Infrastructure.Service.LoadLevels;
 using Infrastructure.States;
 using Infrastructure.Utility;
 using UI.Common.StateViewers;
@@ -10,9 +11,9 @@ namespace Infrastructure
 		private IState _loadScene;
 		private IState _gameBootstrap;
 		
-		public GameStateMachine(IStateViewer loadCurtain, ICoroutineRunner coroutineRunner)
+		public GameStateMachine(IStateViewer loadCurtain, ICoroutineRunner coroutineRunner, LevelPreset levelPreset)
 		{
-			_gameBootstrap = new GameBootstrapState();
+			_gameBootstrap = new GameBootstrapState(levelPreset);
 			_loadScene = new LoadSceneState(loadCurtain, new UnitySceneLoadLevelService(coroutineRunner), _gameBootstrap);
 		}
 

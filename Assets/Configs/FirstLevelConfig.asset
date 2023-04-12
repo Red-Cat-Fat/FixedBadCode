@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd8fa136f2540898cf53fe969848b65, type: 3}
+  m_Name: FirstLevelConfig
+  m_EditorClassIdentifier: 
+  BallSpawners:
+  - Color: 0
+    BallPrefab: {fileID: 3396548907158465802, guid: 7abcfe62973972048a747040fa326009, type: 3}
+    Time: 5
+  - Color: 1
+    BallPrefab: {fileID: 6057674659627671086, guid: 38ff5d19525d8ea4c889a175e12c22fb, type: 3}
+    Time: 1
+  - Color: 2
+    BallPrefab: {fileID: 8825396058871552578, guid: 661c9b53cc0932847b8dfe680e9c938b, type: 3}
+    Time: 3

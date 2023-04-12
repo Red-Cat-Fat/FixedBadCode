@@ -11,7 +11,7 @@ public class BallCounterUI : MonoBehaviour, IBallCounterWaiter
     private BallCounter _counter;
     private bool _isInitialize;
 
-    public void Constuct(BallCounter counter)
+    public void Construct(BallCounter counter)
     {
 	    _counter = counter;
 	    _isInitialize = true;
