@@ -9,27 +9,27 @@ public enum BallType
 
 public class BallCounter
 {
-    private readonly Dictionary<BallType, int> _totalBals = new Dictionary<BallType, int>();
+    private readonly Dictionary<BallType, int> _totalBalls = new Dictionary<BallType, int>();
     
     public BallCounter()
     {
-        _totalBals[BallType.Red] = 0;
-        _totalBals[BallType.Green] = 0;
-        _totalBals[BallType.Blue] = 0;
+        _totalBalls[BallType.Red] = 0;
+        _totalBalls[BallType.Green] = 0;
+        _totalBalls[BallType.Blue] = 0;
     }
 
     public int GetValue(BallType type)
     {
-        return _totalBals[type];
+        return _totalBalls[type];
     }
     
     public void AddBall(BallType type)
     {
-        _totalBals[type]++;
+        _totalBalls[type]++;
     }
 
     public void DelBall(BallType type)
     {
-        _totalBals[type]--;
+        _totalBalls[type]--;
     }
 }

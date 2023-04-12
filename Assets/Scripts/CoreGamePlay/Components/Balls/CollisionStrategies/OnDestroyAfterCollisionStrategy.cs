@@ -13,8 +13,7 @@ namespace CoreGamePlay.Components.Balls.CollisionStrategies
 
 		protected override void DoCollision()
 		{
-			Destroy(this.gameObject);
-			_counter.DelBall(BallType.Green);
+			Destroy(gameObject);
 		}
 	}
 }

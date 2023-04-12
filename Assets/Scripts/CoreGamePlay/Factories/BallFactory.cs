@@ -1,3 +1,4 @@
+using CoreGamePlay.Components.Triggers;
 using CoreGamePlay.Components.Waiters;
 using UnityEngine;
 
@@ -32,6 +33,14 @@ namespace CoreGamePlay.Factories
 				waiter.Construct(this);
 			
 			_counter.AddBall(_ballType);
+
+			var destroyTrigger = newGameObject.AddComponent<OnDestroyTrigger>();
+			destroyTrigger.DestroyEvent += OnBallDestroy;
+		}
+		
+		private void OnBallDestroy(GameObject obj)
+		{
+			_counter.DelBall(_ballType);
 		}
 	}
 }
