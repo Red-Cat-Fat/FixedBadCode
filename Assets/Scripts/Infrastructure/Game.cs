@@ -8,9 +8,9 @@ namespace Infrastructure
 	{
 		public GameStateMachine StateMachine;
 
-		public Game(GroupCanvasStateViewer loadCurtain, ICoroutineRunner coroutineRunner, LevelPreset levelPreset)
+		public Game(GroupCanvasStateViewer loadCurtain, ICoroutineRunner coroutineRunner, GameSettings gameSettings)
 		{
-			StateMachine = new GameStateMachine(loadCurtain, coroutineRunner, levelPreset);
+			StateMachine = new GameStateMachine(loadCurtain, coroutineRunner, gameSettings);
 		}
 	}
 }

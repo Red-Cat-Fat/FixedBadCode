@@ -5,15 +5,17 @@ using UnityEngine;
 
 namespace Infrastructure.States
 {
-	public class GameBootstrapState : IState
+	public class LevelInitializeState : IState
 	{
+		private readonly GameObject _uiPrefab;
 		private readonly LevelPreset _level;
 		private readonly GameObject _spawner;
 
 		private readonly List<BallFactory> _ballFactories = new List<BallFactory>();
 
-		public GameBootstrapState(LevelPreset level)
+		public LevelInitializeState(GameObject uiPrefab, LevelPreset level)
 		{
+			_uiPrefab = uiPrefab;
 			_level = level;
 		}
 		
@@ -35,11 +37,9 @@ namespace Infrastructure.States
 			}
 			
 			Debug.LogFormat("Enter GameBootstrapState BallSpawner: {0}", _level.BallSpawners.Length);
-			
-			var ui = Object.FindObjectsOfType<BallCounterUI>(); //не делайте так - это плохо
-			foreach (var ballWaiters in ui) 
-				ballWaiters.Construct(ballCounter);
-			Debug.LogFormat("Enter GameBootstrapState BallCounterUI: {0}", ui.Length);
+			var ui = Object.Instantiate(_uiPrefab);
+			var ballWaiterUi = ui.GetComponent<BallCounterUI>();
+			ballWaiterUi.Construct(ballCounter);
 		}
 
 		public void Exit() { }

@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73bd84dbcd8e6949bb03f9a65dade5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPreset: {fileID: 11400000, guid: 80ecdcd62bf6941358001f1c38d0edc8, type: 2}
+  GameSettings: {fileID: 11400000, guid: f918d467631a14d8c9d9e3e928ec4ab3, type: 2}
   LoadCurtain: {fileID: 499432229}
 --- !u!4 &1158500317
 Transform:
