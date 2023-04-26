@@ -8,11 +8,12 @@ using Infrastructure.Utility;
 using UI.Common.StateViewers;
 using UnityEngine;
 
-namespace Infrastructure
+namespace Infrastructure.StateMachines
 {
 	
-	public class GameStateMachine
+	public class GameStateMachine : IPayloadEnterStateMachine, IEnterStateMachine
 	{
+		private IState _currentState;
 		private readonly Dictionary<Type, IState> _gameStates;
 		
 		public GameStateMachine(
