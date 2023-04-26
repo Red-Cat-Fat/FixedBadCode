@@ -4,6 +4,6 @@ namespace Infrastructure.StateMachines
 {
 	public interface IEnterStateMachine
 	{
-		void Enter<TState>() where TState : IEnterState;
+		IState Enter<TState>() where TState : IEnterState;
 	}
 }

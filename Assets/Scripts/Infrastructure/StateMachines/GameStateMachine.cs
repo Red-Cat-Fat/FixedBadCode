@@ -10,16 +10,13 @@ using UnityEngine;
 
 namespace Infrastructure.StateMachines
 {
-	
 	public class GameStateMachine : IPayloadEnterStateMachine, IEnterStateMachine
 	{
-		private IState _currentState;
 		private readonly Dictionary<Type, IState> _gameStates;
-		
-		public GameStateMachine(
-			IStateViewer loadCurtain, 
-			ICoroutineRunner coroutineRunner,
-			GameSettings gameSettings)
+
+		private IState _currentState;
+
+		public GameStateMachine(IStateViewer loadCurtain, ICoroutineRunner coroutineRunner, GameSettings gameSettings)
 		{
 			_gameStates = new Dictionary<Type, IState>
 			{
@@ -32,34 +29,40 @@ namespace Infrastructure.StateMachines
 					new LevelInitializeState(gameSettings.UiPrefab, gameSettings.LevelPresets.First())
 				},
 				{
-					typeof(GamePlayState),
-					new GamePlayState()
+					typeof(GamePlayState), new GamePlayState()
 				},
 			};
-			Enter<LoadSceneEnterPayloadState, string>("GamePlay");
+			_currentState = Enter<LoadSceneEnterPayloadState, string>("GamePlay");
 		}
 
-		public void Enter<TState>() where TState : IEnterState
+		public IState Enter<TState>()
+			where TState : IEnterState
 		{
-			var enterState = (TState)_gameStates[typeof(TState)];
+			var enterState = (TState) _gameStates[typeof(TState)];
 			if (enterState == null)
 			{
 				Debug.LogError("Incorrect settings");
-				return;
+				return null;
 			}
+			_currentState?.Exit();
 			enterState.Enter();
+			_currentState = enterState;
+			return enterState;
 		}
 
-		public void Enter<TState, TPayload>(TPayload payload)
+		public IState Enter<TState, TPayload>(TPayload payload)
 			where TState : IEnterPayloadState<TPayload>
 		{
-			var payloadState = (TState)_gameStates[typeof(TState)];
+			var payloadState = (TState) _gameStates[typeof(TState)];
 			if (payloadState == null)
 			{
 				Debug.LogError("Incorrect settings");
-				return;
+				return null;
 			}
+			_currentState?.Exit();
 			payloadState.Enter(payload);
+			_currentState = payloadState;
+			return payloadState;
 		}
 	}
 }

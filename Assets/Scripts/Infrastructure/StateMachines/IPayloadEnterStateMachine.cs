@@ -4,7 +4,7 @@ namespace Infrastructure.StateMachines
 {
 	public interface IPayloadEnterStateMachine
 	{
-		public void Enter<TState, TPayload>(TPayload payload)
+		public IState Enter<TState, TPayload>(TPayload payload)
 			where TState : IEnterPayloadState<TPayload>;
 	}
 }

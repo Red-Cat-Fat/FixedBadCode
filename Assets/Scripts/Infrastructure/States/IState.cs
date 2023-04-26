@@ -2,6 +2,7 @@
 {
 	public interface IState
 	{
+		void Exit();
 	}
 
 	public interface IEnterState : IState

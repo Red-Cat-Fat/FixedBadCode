@@ -10,8 +10,6 @@ namespace Infrastructure.States
 		private readonly ILoadLevelService _loadLevelService;
 		private readonly IEnterStateMachine _enterStateMachine;
 
-		public const string _gamePlayScene = "GamePlay";
-
 		public LoadSceneEnterPayloadState(
 			IStateViewer loadCurtain,
 			ILoadLevelService loadLevelService,
@@ -25,13 +23,12 @@ namespace Infrastructure.States
 		public void Enter(string payloadData)
 		{
 			_loadCurtain.Enable();
-			_loadLevelService.Load(payloadData, Exit);
+			_loadLevelService.Load(payloadData, ()=>_enterStateMachine.Enter<LevelInitializeState>());
 		}
 
 		public void Exit()
 		{
 			_loadCurtain.Disable();
-			_enterStateMachine.Enter<LevelInitializeState>();
 		}
 	}
 }
