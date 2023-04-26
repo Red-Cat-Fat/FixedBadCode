@@ -2,10 +2,14 @@
 {
 	public interface IState
 	{
+	}
+
+	public interface IEnterState : IState
+	{
 		void Enter();
 	}
 
-	public interface IStatePayload<T> : IState
+	public interface IEnterPayloadState<T> : IState
 	{
 		void Enter(T payloadData);
 	}

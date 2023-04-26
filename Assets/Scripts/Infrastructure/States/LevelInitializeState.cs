@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Infrastructure.States
 {
-	public class LevelInitializeState : IState
+	public class LevelInitializeState : IEnterState
 	{
 		private readonly GameObject _uiPrefab;
 		private readonly LevelPreset _level;

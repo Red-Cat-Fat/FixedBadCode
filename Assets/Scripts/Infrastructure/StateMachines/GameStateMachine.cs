@@ -24,8 +24,8 @@ namespace Infrastructure.StateMachines
 			_gameStates = new Dictionary<Type, IState>
 			{
 				{
-					typeof(LoadSceneState),
-					new LoadSceneState(loadCurtain, new UnitySceneLoadLevelService(coroutineRunner), this)
+					typeof(LoadSceneEnterPayloadState),
+					new LoadSceneEnterPayloadState(loadCurtain, new UnitySceneLoadLevelService(coroutineRunner), this)
 				},
 				{
 					typeof(LevelInitializeState),
@@ -36,21 +36,28 @@ namespace Infrastructure.StateMachines
 					new GamePlayState()
 				},
 			};
-			Enter<LoadSceneState, string>("GamePlay");
+			Enter<LoadSceneEnterPayloadState, string>("GamePlay");
 		}
 
-		public void Enter<TState>() where TState : IState
+		public void Enter<TState>() where TState : IEnterState
 		{
-			_gameStates[typeof(TState)].Enter();
+			var enterState = (TState)_gameStates[typeof(TState)];
+			if (enterState == null)
+			{
+				Debug.LogError("Incorrect settings");
+				return;
+			}
+			enterState.Enter();
 		}
 
 		public void Enter<TState, TPayload>(TPayload payload)
-			where TState : IStatePayload<TPayload>
+			where TState : IEnterPayloadState<TPayload>
 		{
 			var payloadState = (TState)_gameStates[typeof(TState)];
 			if (payloadState == null)
 			{
 				Debug.LogError("Incorrect settings");
+				return;
 			}
 			payloadState.Enter(payload);
 		}
