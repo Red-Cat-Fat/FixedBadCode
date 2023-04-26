@@ -7,18 +7,18 @@ namespace Infrastructure.States
 	{
 		private readonly IStateViewer _loadCurtain;
 		private readonly ILoadLevelService _loadLevelService;
-		private readonly IState _nextState;
+		private readonly GameStateMachine _stateMachine;
 		
-		private const string _gamePlayScene = "GamePlay";
+		public const string _gamePlayScene = "GamePlay";
 
 		public LoadSceneState(
 			IStateViewer loadCurtain,
 			ILoadLevelService loadLevelService,
-			IState nextState)
+			GameStateMachine stateMachine)
 		{
 			_loadCurtain = loadCurtain;
 			_loadLevelService = loadLevelService;
-			_nextState = nextState;
+			_stateMachine = stateMachine;
 		}
 		
 		public void Enter()
@@ -30,7 +30,7 @@ namespace Infrastructure.States
 		public void Exit()
 		{
 			_loadCurtain.Disable();
-			_nextState.Enter();
+			_stateMachine.Enter<LevelInitializeState>();
 		}
 	}
 }

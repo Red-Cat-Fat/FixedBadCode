@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Infrastructure.Configs;
 using Infrastructure.Service.LoadLevels;
 using Infrastructure.States;
@@ -9,21 +11,34 @@ namespace Infrastructure
 {
 	public class GameStateMachine
 	{
-		private IState _loadScene;
-		private IState _gameBootstrap;
+		private readonly Dictionary<Type, IState> _gameStates;
 		
 		public GameStateMachine(
 			IStateViewer loadCurtain, 
 			ICoroutineRunner coroutineRunner,
 			GameSettings gameSettings)
 		{
-			_gameBootstrap = new LevelInitializeState(gameSettings.UiPrefab, gameSettings.LevelPresets.First());
-			_loadScene = new LoadSceneState(loadCurtain, new UnitySceneLoadLevelService(coroutineRunner), _gameBootstrap);
+			_gameStates = new Dictionary<Type, IState>
+			{
+				{
+					typeof(LevelInitializeState),
+					new LevelInitializeState(gameSettings.UiPrefab, gameSettings.LevelPresets.First())
+				},
+				{
+					typeof(LoadSceneState),
+					new LoadSceneState(loadCurtain, new UnitySceneLoadLevelService(coroutineRunner), this)
+				},
+				{
+					typeof(GamePlayState),
+					new GamePlayState()
+				},
+			};
+			Enter<LoadSceneState>();
 		}
 
-		public void Start()
+		public void Enter<T>() where T : IState
 		{
-			_loadScene.Enter();
+			_gameStates[typeof(T)].Enter();
 		}
 	}
 }

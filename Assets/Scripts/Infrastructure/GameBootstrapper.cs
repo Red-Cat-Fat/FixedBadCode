@@ -10,12 +10,12 @@ namespace Infrastructure
 	{
 		public GameSettings GameSettings;
 		public GroupCanvasStateViewer LoadCurtain;
+		private Game _game;
 		public void Awake()
 		{
 			DontDestroyOnLoad(LoadCurtain);
-			var game = new Game(LoadCurtain, this, GameSettings);
-			game.StateMachine.Start();
-			
+			_game = new Game(LoadCurtain, this, GameSettings);
+
 			DontDestroyOnLoad(this);
 		}
 	}
