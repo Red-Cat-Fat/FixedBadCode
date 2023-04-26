@@ -6,6 +6,8 @@ namespace Infrastructure.Configs
 	public class GameSettings : ScriptableObject
 	{
 		public GameObject UiPrefab;
+		public GameObject TimeInputMobile;
+		public GameObject TimeInputEditor;
 		public LevelPreset[] LevelPresets;
 	}
 }

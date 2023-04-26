@@ -16,6 +16,9 @@ namespace Infrastructure.StateMachines
 
 		private IState _currentState;
 
+		public IState CurrentState
+			=> _currentState;
+		
 		public GameStateMachine(IStateViewer loadCurtain, ICoroutineRunner coroutineRunner, GameSettings gameSettings)
 		{
 			_gameStates = new Dictionary<Type, IState>
@@ -26,7 +29,7 @@ namespace Infrastructure.StateMachines
 				},
 				{
 					typeof(LevelInitializeState),
-					new LevelInitializeState(gameSettings.UiPrefab, gameSettings.LevelPresets.First())
+					new LevelInitializeState(gameSettings, gameSettings.LevelPresets.First(), this)
 				},
 				{
 					typeof(GamePlayState), new GamePlayState()
@@ -38,7 +41,7 @@ namespace Infrastructure.StateMachines
 		public IState Enter<TState>()
 			where TState : IEnterState
 		{
-			var enterState = (TState) _gameStates[typeof(TState)];
+			var enterState = (IEnterState) _gameStates[typeof(TState)];
 			if (enterState == null)
 			{
 				Debug.LogError("Incorrect settings");

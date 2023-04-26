@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   UiPrefab: {fileID: 2121752359678990876, guid: c1e0ab99521154775a296a68fe1d5b61, type: 3}
+  TimeInputMobile: {fileID: 7169866390652054471, guid: a96d496a38ac94cafa97b2b03abd4343, type: 3}
+  TimeInputEditor: {fileID: 6318787435636858708, guid: fdfeef9e0f5f74947b9aa1eb9ecc492a, type: 3}
   LevelPresets:
   - {fileID: 11400000, guid: 80ecdcd62bf6941358001f1c38d0edc8, type: 2}

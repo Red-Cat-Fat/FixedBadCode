@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Infrastructure.States
 {
-	public class GamePlayState : IState
+	public class GamePlayState : IEnterState
 	{
 		public void Enter()
 		{

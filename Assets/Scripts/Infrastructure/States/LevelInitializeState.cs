@@ -1,28 +1,34 @@
 ﻿using System.Collections.Generic;
 using CoreGamePlay.Factories;
 using Infrastructure.Configs;
+using Infrastructure.Service.Input;
+using Infrastructure.Service.Times;
+using Infrastructure.StateMachines;
+using UI.Common.GamePlayHUD;
 using UnityEngine;
 
 namespace Infrastructure.States
 {
 	public class LevelInitializeState : IEnterState
 	{
-		private readonly GameObject _uiPrefab;
+		private readonly GameSettings _gameSettings;
 		private readonly LevelPreset _level;
+		private readonly IEnterStateMachine _enterStateMachine;
 		private readonly GameObject _spawner;
 
 		private readonly List<BallFactory> _ballFactories = new List<BallFactory>();
 
-		public LevelInitializeState(GameObject uiPrefab, LevelPreset level)
+		public LevelInitializeState(GameSettings gameSettings, LevelPreset level, IEnterStateMachine enterStateMachine)
 		{
-			_uiPrefab = uiPrefab;
+			_gameSettings = gameSettings;
 			_level = level;
+			_enterStateMachine = enterStateMachine;
 		}
-		
+
 		public void Enter()
 		{
 			var ballCounter = new BallCounter();
-			
+
 			foreach (var spawnerPrefab in _level.BallSpawners)
 			{
 				var spawnerGameObject = new GameObject();
@@ -35,13 +41,27 @@ namespace Infrastructure.States
 					spawnerPrefab.Color,
 					spawnerPrefab.Time);
 			}
-			
+
 			Debug.LogFormat("Enter GameBootstrapState BallSpawner: {0}", _level.BallSpawners.Length);
-			var ui = Object.Instantiate(_uiPrefab);
+
+			var ui = Object.Instantiate(_gameSettings.UiPrefab);
 			var ballWaiterUi = ui.GetComponent<BallCounterUI>();
 			ballWaiterUi.Construct(ballCounter);
+
+			GameObject controlPrefab;
+			if (Application.isEditor)
+				controlPrefab = Object.Instantiate(_gameSettings.TimeInputEditor);
+			else
+				controlPrefab = Object.Instantiate(_gameSettings.TimeInputMobile, ui.transform);
+			
+			var inputService = controlPrefab.GetComponent<IInputService>();
+			var timeController = new UnityForceTimeChangerService(inputService);
+
+			_enterStateMachine.Enter<GamePlayState>();
 		}
 
-		public void Exit() { }
+		public void Exit()
+		{
+		}
 	}
 }
