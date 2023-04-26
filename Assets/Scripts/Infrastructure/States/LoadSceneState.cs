@@ -1,5 +1,8 @@
-﻿using Infrastructure.Service.LoadLevels;
+﻿using System.ComponentModel.Design;
+using Infrastructure.Service;
+using Infrastructure.Service.LoadLevels;
 using Infrastructure.StateMachines;
+using Infrastructure.Utility;
 using UI.Common.StateViewers;
 
 namespace Infrastructure.States
@@ -7,16 +10,18 @@ namespace Infrastructure.States
 	public class LoadSceneEnterPayloadState : IEnterPayloadState<string>
 	{
 		private readonly IStateViewer _loadCurtain;
-		private readonly ILoadLevelService _loadLevelService;
+		private readonly UnitySceneLoadLevelService _loadLevelService;
 		private readonly IEnterStateMachine _enterStateMachine;
 
 		public LoadSceneEnterPayloadState(
 			IStateViewer loadCurtain,
-			ILoadLevelService loadLevelService,
-			IEnterStateMachine enterStateMachine)
+			ICoroutineRunner coroutineRunner,
+			IEnterStateMachine enterStateMachine,
+			ServicesContainer servicesContainer)
 		{
 			_loadCurtain = loadCurtain;
-			_loadLevelService = loadLevelService;
+			_loadLevelService = new UnitySceneLoadLevelService(coroutineRunner);
+			servicesContainer.Add<ILoadLevelService>(_loadLevelService);
 			_enterStateMachine = enterStateMachine;
 		}
 

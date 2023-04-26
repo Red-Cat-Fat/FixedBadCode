@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CoreGamePlay.Factories;
 using Infrastructure.Configs;
+using Infrastructure.Service;
 using Infrastructure.Service.Input;
 using Infrastructure.Service.Times;
 using Infrastructure.StateMachines;
@@ -14,15 +15,21 @@ namespace Infrastructure.States
 		private readonly GameSettings _gameSettings;
 		private readonly LevelPreset _level;
 		private readonly IEnterStateMachine _enterStateMachine;
+		private readonly ServicesContainer _servicesContainer;
 		private readonly GameObject _spawner;
 
 		private readonly List<BallFactory> _ballFactories = new List<BallFactory>();
 
-		public LevelInitializeState(GameSettings gameSettings, LevelPreset level, IEnterStateMachine enterStateMachine)
+		public LevelInitializeState(
+			GameSettings gameSettings,
+			LevelPreset level,
+			IEnterStateMachine enterStateMachine,
+			ServicesContainer servicesContainer)
 		{
 			_gameSettings = gameSettings;
 			_level = level;
 			_enterStateMachine = enterStateMachine;
+			_servicesContainer = servicesContainer;
 		}
 
 		public void Enter()
@@ -55,8 +62,10 @@ namespace Infrastructure.States
 				controlPrefab = Object.Instantiate(_gameSettings.TimeInputMobile, ui.transform);
 			
 			var inputService = controlPrefab.GetComponent<IInputService>();
+			_servicesContainer.Add(inputService);
 			var timeController = new UnityForceTimeChangerService(inputService);
-
+			_servicesContainer.Add<ITimeScaleService>(timeController);
+			
 			_enterStateMachine.Enter<GamePlayState>();
 		}
 

@@ -7,7 +7,8 @@ namespace Infrastructure.Service.Input
 	public class ButtonInputService : MonoBehaviour, IInputService
 	{
 		public event Action<float> ChangeTimeScaleEvent;
-		
+		public event Action<float> PauseEvent;
+
 		public TMP_Text SpeedValueText;
 		public float ChangeTime = 0.2f;
 		
