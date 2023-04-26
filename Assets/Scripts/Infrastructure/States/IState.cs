@@ -3,6 +3,10 @@
 	public interface IState
 	{
 		void Enter();
-		void Exit();
+	}
+
+	public interface IStatePayload<T> : IState
+	{
+		void Enter(T payloadData);
 	}
 }

@@ -3,12 +3,12 @@ using UI.Common.StateViewers;
 
 namespace Infrastructure.States
 {
-	public class LoadSceneState : IState
+	public class LoadSceneState : IStatePayload<string>
 	{
 		private readonly IStateViewer _loadCurtain;
 		private readonly ILoadLevelService _loadLevelService;
 		private readonly GameStateMachine _stateMachine;
-		
+
 		public const string _gamePlayScene = "GamePlay";
 
 		public LoadSceneState(
@@ -20,7 +20,13 @@ namespace Infrastructure.States
 			_loadLevelService = loadLevelService;
 			_stateMachine = stateMachine;
 		}
-		
+
+		public void Enter(string payloadData)
+		{
+			_loadCurtain.Enable();
+			_loadLevelService.Load(payloadData, Exit);
+		}
+
 		public void Enter()
 		{
 			_loadCurtain.Enable();
