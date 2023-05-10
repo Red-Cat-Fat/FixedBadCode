@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Infrastructure.Service.Times
 {
-	public class UnityForceTimeChangerService : ITimeScaleService, IDisposable
+	public class UnityForceTimeChangerService : ITimeService, IDisposable
 	{
 		private readonly IInputService _inputService;
 
 		public float DeltaTime
-			=> Time.deltaTime * TimeScale;
+			=> Time.deltaTime * _timeScale;
 
-		public float TimeScale { get; private set; } = 1f;
+		private float _timeScale  = 1f;
 
 		public UnityForceTimeChangerService(IInputService inputService)
 		{
@@ -21,8 +21,8 @@ namespace Infrastructure.Service.Times
 		
 		private void OnTimeScaleChanged(float delta)
 		{
-			var newTime = TimeScale + delta;
-			TimeScale = Mathf.Clamp(newTime, 0.0f, 5);
+			var newTime = _timeScale + delta;
+			_timeScale = Mathf.Clamp(newTime, 0.0f, 5);
 		}
 		
 		public void Dispose()

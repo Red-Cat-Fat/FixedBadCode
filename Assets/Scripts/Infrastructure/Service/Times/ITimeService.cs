@@ -1,8 +1,7 @@
 namespace Infrastructure.Service.Times
 {
-	public interface ITimeScaleService : IService
+	public interface ITimeService : IService
 	{
 		float DeltaTime { get; }
-		float TimeScale { get; }
 	}
 }

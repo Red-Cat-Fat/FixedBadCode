@@ -4,6 +4,6 @@ namespace CoreGamePlay.Components.Waiters
 {
 	public interface ITimeScaleWaiter
 	{
-		void Construct(ITimeScaleService timeScaleService);
+		void Construct(ITimeService timeService);
 	}
 }

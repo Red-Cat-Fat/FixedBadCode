@@ -16,7 +16,7 @@ namespace Infrastructure.States
 		public void Enter()
 		{
 			Debug.Log("I'm in gameplay");
-			var timeService = _servicesContainer.Get<ITimeScaleService>();
+			var timeService = _servicesContainer.Get<ITimeService>();
 			Debug.Log(timeService.DeltaTime);
 		}
 		

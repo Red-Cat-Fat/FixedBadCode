@@ -38,7 +38,7 @@ namespace CoreGamePlay.Factories
 			
 			var timeScaleWaiters = newGameObject.GetComponents<ITimeScaleWaiter>();
 			foreach (var waiter in timeScaleWaiters)
-				waiter.Construct(_servicesContainer.Get<ITimeScaleService>());
+				waiter.Construct(_servicesContainer.Get<ITimeService>());
 			
 			_counter.AddBall(_ballType);
 

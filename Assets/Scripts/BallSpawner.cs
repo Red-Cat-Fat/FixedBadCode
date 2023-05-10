@@ -10,11 +10,11 @@ public class BallSpawner : MonoBehaviour
 	private float _curTime;
 	private bool _isInitialize;
 	private BallFactory _factory;
-	private ITimeScaleService _timeScaleService;
+	private ITimeService _timeService;
 
-	public void Construct(ITimeScaleService timeScaleService, BallFactory factory, float timeSpawn)
+	public void Construct(ITimeService timeService, BallFactory factory, float timeSpawn)
 	{
-		_timeScaleService = timeScaleService;
+		_timeService = timeService;
 		_isInitialize = true;
 		_factory = factory;
 		_timeSpawn = timeSpawn;
@@ -25,7 +25,7 @@ public class BallSpawner : MonoBehaviour
 		if(!_isInitialize)
 			return;
 		
-		_curTime -= _timeScaleService.DeltaTime;
+		_curTime -= _timeService.DeltaTime;
 		if (_curTime < 0)
 		{
 			_factory.SpawnBall(Random.insideUnitSphere * RadiusSpawn);

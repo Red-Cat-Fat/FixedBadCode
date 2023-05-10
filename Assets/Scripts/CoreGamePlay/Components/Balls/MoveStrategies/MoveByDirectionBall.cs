@@ -9,11 +9,11 @@ namespace CoreGamePlay.Components.Balls
 	{
 		private Vector3 _direction;
 	
-		private ITimeScaleService _timeScale;
+		private ITimeService _time;
 
-		public void Construct(ITimeScaleService timeScale)
+		public void Construct(ITimeService time)
 		{
-			_timeScale = timeScale;
+			_time = time;
 		}
 
 		public void Start()
@@ -25,7 +25,7 @@ namespace CoreGamePlay.Components.Balls
 
 		private void Update()
 		{
-			MovePosition(_direction * _timeScale.DeltaTime);
+			MovePosition(_direction * _time.DeltaTime);
 		}
 	}
 }

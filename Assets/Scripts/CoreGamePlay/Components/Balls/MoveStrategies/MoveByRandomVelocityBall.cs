@@ -11,24 +11,24 @@ namespace CoreGamePlay.Components.Balls
 		public float RandomCooldown = 1f;
 		public float Velocity = 5;
 
-		private ITimeScaleService _timeScaleService;
+		private ITimeService _timeService;
 		private ServicesContainer _serviceContainer;
 		private float _time = 0;
 		private Vector3 _currentDirection;
 		
-		public void Construct(ITimeScaleService timeScaleService)
-			=> _timeScaleService = timeScaleService;
+		public void Construct(ITimeService timeService)
+			=> _timeService = timeService;
 
 		private void Update()
 		{
-			_time -= _timeScaleService.DeltaTime;
+			_time -= _timeService.DeltaTime;
 			if (_time < 0)
 			{
 				_currentDirection = Random.insideUnitSphere * Velocity;
 				_time = RandomCooldown;
 			}
 			
-			MovePosition(_currentDirection * _timeScaleService.DeltaTime);
+			MovePosition(_currentDirection * _timeService.DeltaTime);
 		}
 	}
 }
