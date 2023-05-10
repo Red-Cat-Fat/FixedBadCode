@@ -10,8 +10,10 @@ namespace Infrastructure
 	{
 		public GameStateMachine StateMachine;
 		public readonly ServicesContainer ServicesContainer;
+		
 		public Game(GroupCanvasStateViewer loadCurtain, ICoroutineRunner coroutineRunner, GameSettings gameSettings)
 		{
+			ServicesContainer = new ServicesContainer();
 			StateMachine = new GameStateMachine(loadCurtain, coroutineRunner, gameSettings, ServicesContainer);
 			StateMachine.CurrentState.Exit();
 		}

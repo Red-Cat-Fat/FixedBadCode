@@ -110,5 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e134401e769aad4cab7adf9c9903c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomCooldown: 1
-  RandovVelocity: 5
+  _rigidbody: {fileID: 3592834190894527864}
+  RandomCooldown: 0.36
+  Velocity: 3

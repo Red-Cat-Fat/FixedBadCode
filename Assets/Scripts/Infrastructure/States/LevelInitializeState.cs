@@ -36,19 +36,6 @@ namespace Infrastructure.States
 		{
 			var ballCounter = new BallCounter();
 
-			foreach (var spawnerPrefab in _level.BallSpawners)
-			{
-				var spawnerGameObject = new GameObject();
-				var factory = new BallFactory(spawnerPrefab.Color, spawnerPrefab.BallPrefab, ballCounter);
-				_ballFactories.Add(factory);
-				var spawner = spawnerGameObject.AddComponent<BallSpawner>();
-				spawner.Construct(factory, spawnerPrefab.Time);
-				spawnerGameObject.name = string.Format(
-					"Spawner: {0} in {1}sec",
-					spawnerPrefab.Color,
-					spawnerPrefab.Time);
-			}
-
 			Debug.LogFormat("Enter GameBootstrapState BallSpawner: {0}", _level.BallSpawners.Length);
 
 			var ui = Object.Instantiate(_gameSettings.UiPrefab);
@@ -63,8 +50,22 @@ namespace Infrastructure.States
 			
 			var inputService = controlPrefab.GetComponent<IInputService>();
 			_servicesContainer.Add(inputService);
-			var timeController = new UnityForceTimeChangerService(inputService);
+
+			var timeController = new UnityForceTimeChangerService(_servicesContainer.Get<IInputService>());
 			_servicesContainer.Add<ITimeScaleService>(timeController);
+			
+			foreach (var spawnerPrefab in _level.BallSpawners)
+			{
+				var spawnerGameObject = new GameObject();
+				var factory = new BallFactory(spawnerPrefab.Color, spawnerPrefab.BallPrefab, ballCounter, _servicesContainer);
+				_ballFactories.Add(factory);
+				var spawner = spawnerGameObject.AddComponent<BallSpawner>();
+				spawner.Construct(_servicesContainer.Get<ITimeScaleService>(), factory, spawnerPrefab.Time);
+				spawnerGameObject.name = string.Format(
+					"Spawner: {0} in {1}sec",
+					spawnerPrefab.Color,
+					spawnerPrefab.Time);
+			}
 			
 			_enterStateMachine.Enter<GamePlayState>();
 		}

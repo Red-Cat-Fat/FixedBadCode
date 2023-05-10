@@ -1,4 +1,5 @@
 using CoreGamePlay.Factories;
+using Infrastructure.Service.Times;
 using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
@@ -9,9 +10,11 @@ public class BallSpawner : MonoBehaviour
 	private float _curTime;
 	private bool _isInitialize;
 	private BallFactory _factory;
-	
-	public void Construct(BallFactory factory, float timeSpawn)
+	private ITimeScaleService _timeScaleService;
+
+	public void Construct(ITimeScaleService timeScaleService, BallFactory factory, float timeSpawn)
 	{
+		_timeScaleService = timeScaleService;
 		_isInitialize = true;
 		_factory = factory;
 		_timeSpawn = timeSpawn;
@@ -22,7 +25,7 @@ public class BallSpawner : MonoBehaviour
 		if(!_isInitialize)
 			return;
 		
-		_curTime -= UnityEngine.Time.deltaTime;
+		_curTime -= _timeScaleService.DeltaTime;
 		if (_curTime < 0)
 		{
 			_factory.SpawnBall(Random.insideUnitSphere * RadiusSpawn);

@@ -8,6 +8,11 @@ namespace Infrastructure.Service.Times
 	{
 		private readonly IInputService _inputService;
 
+		public float DeltaTime
+			=> Time.deltaTime * TimeScale;
+
+		public float TimeScale { get; private set; } = 1f;
+
 		public UnityForceTimeChangerService(IInputService inputService)
 		{
 			_inputService = inputService;
@@ -16,8 +21,8 @@ namespace Infrastructure.Service.Times
 		
 		private void OnTimeScaleChanged(float delta)
 		{
-			var newTime = Time.timeScale + delta;
-			Time.timeScale = Mathf.Clamp(newTime, 0.1f, 5);
+			var newTime = TimeScale + delta;
+			TimeScale = Mathf.Clamp(newTime, 0.0f, 5);
 		}
 		
 		public void Dispose()
