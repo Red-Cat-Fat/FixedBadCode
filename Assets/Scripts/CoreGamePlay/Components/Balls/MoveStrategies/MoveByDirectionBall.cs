@@ -16,10 +16,9 @@ namespace CoreGamePlay.Components.Balls
 			_time = time;
 		}
 
-		public void Start()
+		public void Construct(Vector3 position)
 		{
-			var blueBalls = FindObjectsOfType<GreenTarget>();
-			_direction = blueBalls[Random.Range(0, blueBalls.Length)].transform.position - transform.position;
+			_direction = position - transform.position;
 			_direction = _direction.normalized;
 		}
 

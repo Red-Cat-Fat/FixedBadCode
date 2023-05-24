@@ -17,3 +17,12 @@ MonoBehaviour:
   TimeInputEditor: {fileID: 6318787435636858708, guid: fdfeef9e0f5f74947b9aa1eb9ecc492a, type: 3}
   LevelPresets:
   - {fileID: 11400000, guid: 80ecdcd62bf6941358001f1c38d0edc8, type: 2}
+  DemoName:
+    rid: 1996621315292004364
+  references:
+    version: 2
+    RefIds:
+    - rid: 1996621315292004364
+      type: {class: DemoClass, ns: Infrastructure.Configs, asm: Assembly-CSharp}
+      data:
+        FixBug: 1

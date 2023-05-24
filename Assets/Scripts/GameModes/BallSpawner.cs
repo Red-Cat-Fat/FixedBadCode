@@ -1,4 +1,5 @@
 using CoreGamePlay.Factories;
+using CoreGamePlay.Factories.BallFactories;
 using Infrastructure.Service.Times;
 using UnityEngine;
 
@@ -9,10 +10,10 @@ public class BallSpawner : MonoBehaviour
 
 	private float _curTime;
 	private bool _isInitialize;
-	private BallFactory _factory;
+	private BaseBallFactory _factory;
 	private ITimeService _timeService;
 
-	public void Construct(ITimeService timeService, BallFactory factory, float timeSpawn)
+	public void Construct(ITimeService timeService, BaseBallFactory factory, float timeSpawn)
 	{
 		_timeService = timeService;
 		_isInitialize = true;

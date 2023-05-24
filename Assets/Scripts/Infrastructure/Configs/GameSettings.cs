@@ -1,3 +1,5 @@
+using System;
+using SerializeReferenceEditor;
 using UnityEngine;
 
 namespace Infrastructure.Configs

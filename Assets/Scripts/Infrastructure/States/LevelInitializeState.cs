@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CoreGamePlay.Factories;
+using CoreGamePlay.Factories.BallFactories;
 using Infrastructure.Configs;
 using Infrastructure.Service;
 using Infrastructure.Service.Input;
@@ -18,7 +19,7 @@ namespace Infrastructure.States
 		private readonly ServicesContainer _servicesContainer;
 		private readonly GameObject _spawner;
 
-		private readonly List<BallFactory> _ballFactories = new List<BallFactory>();
+		private readonly List<BaseBallFactory> _ballFactories = new List<BaseBallFactory>();
 
 		public LevelInitializeState(
 			GameSettings gameSettings,
@@ -36,7 +37,7 @@ namespace Infrastructure.States
 		{
 			var ballCounter = new BallCounter();
 
-			Debug.LogFormat("Enter GameBootstrapState BallSpawner: {0}", _level.BallSpawners.Length);
+			Debug.LogFormat("Enter GameBootstrapState BallSpawner: {0}", _level.Spawners.Count);
 
 			var ui = Object.Instantiate(_gameSettings.UiPrefab);
 			var ballWaiterUi = ui.GetComponent<BallCounterUI>();
@@ -54,10 +55,10 @@ namespace Infrastructure.States
 			//_servicesContainer.Add<ITimeScaleService>(new FixedTimeService(10));
 			_servicesContainer.Add<ITimeService>(new UnityForceTimeChangerService(_servicesContainer.Get<IInputService>()));
 			
-			foreach (var spawnerPrefab in _level.BallSpawners)
+			foreach (var spawnerPrefab in _level.Spawners)
 			{
 				var spawnerGameObject = new GameObject();
-				var factory = new BallFactory(spawnerPrefab.Color, spawnerPrefab.BallPrefab, ballCounter, _servicesContainer);
+				var factory = spawnerPrefab.MakeFactory(ballCounter, _servicesContainer);
 				_ballFactories.Add(factory);
 				var spawner = spawnerGameObject.AddComponent<BallSpawner>();
 				spawner.Construct(_servicesContainer.Get<ITimeService>(), factory, spawnerPrefab.Time);

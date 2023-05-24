@@ -4,16 +4,17 @@ using Infrastructure.Service;
 using Infrastructure.Service.Times;
 using UnityEngine;
 
-namespace CoreGamePlay.Factories
+namespace CoreGamePlay.Factories.BallFactories
 {
-	public class BallFactory
+	public abstract class BaseBallFactory
 	{
+		protected readonly BallCounter _counter;
+		
 		private readonly BallType _ballType;
 		private readonly GameObject _prefab;
-		private readonly BallCounter _counter;
 		private readonly ServicesContainer _servicesContainer;
 
-		public BallFactory(
+		protected BaseBallFactory(
 			BallType ballType,
 			GameObject prefab,
 			BallCounter counter,
@@ -25,6 +26,8 @@ namespace CoreGamePlay.Factories
 			_servicesContainer = servicesContainer;
 		}
 
+		protected abstract void DoSpawn(GameObject ball);
+		
 		public void SpawnBall(Vector3 position)
 		{
 			var newGameObject = Object.Instantiate(
@@ -32,6 +35,8 @@ namespace CoreGamePlay.Factories
 				position,
 				Quaternion.identity);
 
+			DoSpawn(newGameObject);
+			
 			var factoryWaiters = newGameObject.GetComponents<IBallFactoryWaiter>();
 			foreach (var waiter in factoryWaiters)
 				waiter.Construct(this);
@@ -39,8 +44,8 @@ namespace CoreGamePlay.Factories
 			var timeScaleWaiters = newGameObject.GetComponents<ITimeScaleWaiter>();
 			foreach (var waiter in timeScaleWaiters)
 				waiter.Construct(_servicesContainer.Get<ITimeService>());
-			
-			_counter.AddBall(_ballType);
+
+			_counter.AddBall(_ballType, newGameObject);
 
 			var destroyTrigger = newGameObject.AddComponent<OnDestroyTrigger>();
 			destroyTrigger.DestroyEvent += OnBallDestroy;
@@ -48,7 +53,7 @@ namespace CoreGamePlay.Factories
 		
 		private void OnBallDestroy(GameObject obj)
 		{
-			_counter.DelBall(_ballType);
+			_counter.DelBall(_ballType, obj);
 		}
 	}
 }
